@@ -55,7 +55,7 @@ class NodeManager(object):
 
 
     def result_solve_proc(self, result_q, conn_q, store_q):
-        while(True):
+        while True:
             try:
                 if not result_q.empty():
                     content = result_q.get(True)
