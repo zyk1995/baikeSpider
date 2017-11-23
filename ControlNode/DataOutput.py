@@ -44,25 +44,25 @@ class DataOutput(object):
         '''
 
         fout = codecs.open(path, 'a', encoding='utf-8')
-
+        print(self.data)
         for data in self.datas:
             fout.write("<tr>")
             fout.write("<td>%s</td>" % data['url'])
             fout.write("<td>%s</td>" % data['title'])
             fout.write("<td>%s</td>" % data['summary'])
             fout.write("</tr>")
-            self.datas.remove(data)
+        self.datas.remove(data)
         fout.close()
 
-        def output_end(self, path):
-            '''
-            输出HTML结束
-            :param self:
-            :param path:文件存储路径
-            :return:
-            '''
-            fout=codecs.open(path, 'a', encoding='utf-8')
-            fout.write("</table>")
-            fout.write("</body>")
-            fout.write("</html>")
-            fout.close()
+    def output_end(self, path):
+        '''
+        输出HTML结束
+        :param self:
+        :param path:文件存储路径
+        :return:
+        '''
+        fout=codecs.open(path, 'a', encoding='utf-8')
+        fout.write("</table>")
+        fout.write("</body>")
+        fout.write("</html>")
+        fout.close()
