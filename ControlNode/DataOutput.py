@@ -44,14 +44,14 @@ class DataOutput(object):
         '''
 
         fout = codecs.open(path, 'a', encoding='utf-8')
-        print(self.data)
+
         for data in self.datas:
             fout.write("<tr>")
             fout.write("<td>%s</td>" % data['url'])
             fout.write("<td>%s</td>" % data['title'])
             fout.write("<td>%s</td>" % data['summary'])
             fout.write("</tr>")
-        self.datas.remove(data)
+            self.datas.remove(data)
         fout.close()
 
     def output_end(self, path):

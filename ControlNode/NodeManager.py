@@ -69,7 +69,8 @@ class NodeManager(object):
                         print('结果分析进程接受通知然后结束!')
                         store_q.put('end')
                         return
-                    conn_q.put(content['new_urls']) #url为set类型
+                    for url in content['new_urls']:
+                        conn_q.put(url) #url为set类型
 
                     store_q.put(content['data']) #解析出来的数据为dict类型
                     print("结果分析进程====>end")
@@ -85,7 +86,6 @@ class NodeManager(object):
             if not store_q.empty():
                 print("存储进程====>start")
                 data = store_q.get()
-                print(data)
                 if data == 'end':
                     print('存储进程接受通知然后结束！')
                     output.ouput_end(output.filepath)
