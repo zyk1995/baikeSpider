@@ -10,6 +10,8 @@ import time
 生成文件1按照当前时间进行命名避免重复，
 同时对文件进行缓存写入
 '''
+
+
 class DataOutput(object):
     def __init__(self):
         self.filepath = 'baike_%s.html' % (time.strftime("%Y_%m_%d_%H_%S", time.localtime()))
@@ -24,6 +26,7 @@ class DataOutput(object):
             self.output_html(self.filepath)
 
     def output_head(self, path):
+
         '''
         将HTML头写进去
         :param path:
@@ -38,7 +41,7 @@ class DataOutput(object):
     def output_html(self, path):
 
         '''
-        将HTML头写进去
+        将Data写入HTML
         :param path:
         :return:
         '''
@@ -54,15 +57,23 @@ class DataOutput(object):
             self.datas.remove(data)
         fout.close()
 
-    def output_end(self, path):
+    def end_output(self, path):
         '''
-        输出HTML结束
-        :param self:
-        :param path:文件存储路径
-        :return:
-        '''
-        fout=codecs.open(path, 'a', encoding='utf-8')
+         输出HTML结束
+         :param self:
+         :param path:文件存储路径
+         :return:
+         '''
+        fout = codecs.open(path, 'a', encoding='utf-8')
         fout.write("</table>")
         fout.write("</body>")
         fout.write("</html>")
         fout.close()
+
+    def end_class(self):
+        pass
+
+
+if __name__ == '__main__':
+    output = DataOutput()
+    output.end_output(output.filepath)

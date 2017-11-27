@@ -1,8 +1,8 @@
 #coding:utf-8
 from multiprocessing.managers import BaseManager
 
-from HtmlDownloader import HtmlDownloader
-from HtmlParser import  HtmlParser
+from SpiderNode.html_Downloader import HtmlDownloader
+from SpiderNode.html_Parser import  HtmlParser
 
 import logging
 class SpiderWork(object):
@@ -35,7 +35,6 @@ class SpiderWork(object):
             try:
                 if not self.task.empty():
                     url = self.task.get()
-
                     if url == 'end':
                         print('控制节点通知爬虫节点停止工作...')
                         #接着通知其它节点停止工作

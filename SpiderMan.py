@@ -1,13 +1,13 @@
 #coding:utf-8
 import logging
 
-from  HtmlParser import HtmlParser
+from  SpiderNode.html_Parser import HtmlParser
 
-from  ControlNode.DataOutput import DataOutput
-from ControlNode.UrlManager import UrlManager
-from SpiderNode.HtmlDownloader import HtmlDownloader
+from  ControlNode.data_output import DataOutput
+from ControlNode.urlmanager import UrlManager
+from SpiderNode.html_Downloader import HtmlDownloader
 
-
+from ControlNode.data_output import DataOutput
 class SpiderMan(object):
     def __init__(self):
         self.manager = UrlManager()
@@ -38,5 +38,10 @@ class SpiderMan(object):
         self.output.output_html()
 
 if __name__ == '__main__':
+    output = DataOutput()
+    output.end_output(output.filepath)
+
+    '''
     spider_man = SpiderMan()
     spider_man.crawl("http://baike.baidu.com/view/284853.htm")
+    '''

@@ -5,8 +5,8 @@ import time
 
 from multiprocessing import  Process, Queue
 
-from DataOutput import DataOutput
-from UrlManager import UrlManager
+from ControlNode.data_output import DataOutput
+from ControlNode.urlmanager import UrlManager
 
 class NodeManager(object):
     def start_Manager(self, url_q, result_q):
@@ -33,12 +33,13 @@ class NodeManager(object):
                 print("URL管理进程====>start")
                 #从URL管理器获取新的url
                 new_url = url_manager.get_new_url()
+                #if(new_url['new_urls'])
                 #将新的URL发给工作节点
                 url_q.put(new_url)
                 print('old_url=', url_manager.old_url_size())
                 print('new_url=', url_manager.new_url_size())
                 #加一个判断条件，当爬去2000个链接后就关闭，并保存进度
-                if(url_manager.old_url_size() > 2000):
+                if(url_manager.old_url_size() > 100):
                     #通知爬行节点工作结束
                     url_q.put('end')
                     print('控制节点发起结束通知!')
@@ -55,8 +56,6 @@ class NodeManager(object):
                     print("添加新的url")
             except BaseException as e:
                 time.sleep(1) #延时休息
-
-
 
     def result_solve_proc(self, result_q, conn_q, store_q):
         while True:
@@ -78,7 +77,6 @@ class NodeManager(object):
                     time.sleep(1)#延时休息
             except BaseException as e:
                 time.sleep(1) #延时休息
-
 
     def store_proc(self,store_q):
         output = DataOutput()
@@ -114,3 +112,4 @@ if __name__ == '__main__':
     result_solve_proc.start()
     store_proc.start()
     manager.get_server().serve_forever()
+
