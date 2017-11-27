@@ -39,7 +39,7 @@ class NodeManager(object):
                 print('old_url=', url_manager.old_url_size())
                 print('new_url=', url_manager.new_url_size())
                 #加一个判断条件，当爬去2000个链接后就关闭，并保存进度
-                if(url_manager.old_url_size() > 100):
+                if(url_manager.old_url_size() > 20):
                     #通知爬行节点工作结束
                     url_q.put('end')
                     print('控制节点发起结束通知!')
@@ -86,7 +86,7 @@ class NodeManager(object):
                 data = store_q.get()
                 if data == 'end':
                     print('存储进程接受通知然后结束！')
-                    output.ouput_end(output.filepath)
+                    output.output_end(output.filepath)
                     return
                 output.store_data(data)
                 print("存储进程====>end")
@@ -112,4 +112,6 @@ if __name__ == '__main__':
     result_solve_proc.start()
     store_proc.start()
     manager.get_server().serve_forever()
+
+
 

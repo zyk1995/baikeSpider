@@ -57,7 +57,7 @@ class DataOutput(object):
             self.datas.remove(data)
         fout.close()
 
-    def end_output(self, path):
+    def output_end(self, path):
         '''
          输出HTML结束
          :param self:
